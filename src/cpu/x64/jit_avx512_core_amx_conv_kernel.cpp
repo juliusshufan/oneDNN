@@ -1021,7 +1021,7 @@ void jit_avx512_core_amx_fwd_kernel_t::compute_icb_loop(
 
     auto tdpbxxd = [=](const Tmm &x1, const Tmm &x2, const Tmm &x3) {
         if (jcp.src_dt == data_type::bf16 && jcp.wei_dt == data_type::bf16) {
-            tdpbf16ps(x1, x2, x3);
+            tdpbuud(x1, x2, x3);
         } else if (jcp.src_dt == data_type::u8 && jcp.wei_dt == data_type::u8) {
             tdpbuud(x1, x2, x3);
         } else if (jcp.src_dt == data_type::u8 && jcp.wei_dt == data_type::s8) {

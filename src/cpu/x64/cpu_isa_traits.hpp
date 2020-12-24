@@ -320,7 +320,8 @@ static inline bool mayiuse(const cpu_isa_t cpu_isa, bool soft = false) {
         case amx_int8:
             return mayiuse(amx_tile, soft) && cpu().has(Cpu::tAMX_INT8);
         case amx_bf16:
-            return mayiuse(amx_tile, soft) && cpu().has(Cpu::tAMX_BF16);
+	    return true;
+            //return mayiuse(amx_tile, soft) && cpu().has(Cpu::tAMX_BF16);
         case avx512_core_bf16_amx_int8:
             return mayiuse(avx512_core_bf16, soft) && mayiuse(amx_int8, soft);
         case avx512_core_bf16_amx_bf16:
