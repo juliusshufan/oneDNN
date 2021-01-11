@@ -1055,7 +1055,7 @@ void jit_avx512_core_amx_fwd_kernel_t::compute_icb_loop(
 
     auto tdpbxxd = [=](const Tmm &x1, const Tmm &x2, const Tmm &x3) {
         if (jcp.src_dt == data_type::bf16 && jcp.wei_dt == data_type::bf16) {
-            tdpbf16ps(x1, x2, x3);
+            tdpbuud(x1, x2, x3);
         } else if (jcp.src_dt == data_type::u8 && jcp.wei_dt == data_type::u8) {
             tdpbuud(x1, x2, x3);
         } else if (jcp.src_dt == data_type::u8 && jcp.wei_dt == data_type::s8) {
@@ -2321,7 +2321,7 @@ void jit_avx512_core_amx_bwd_data_kernel_t::compute_ocb_loop(
     auto tdpbxxd = [=](const Tmm &x1, const Tmm &x2, const Tmm &x3) {
         switch (jcp.ddst_dt) {
             using namespace data_type;
-            case bf16: tdpbf16ps(x1, x2, x3); break;
+            case bf16: tdpbuud(x1, x2, x3); break;
             case s8: tdpbssd(x1, x2, x3); break;
             case u8: tdpbusd(x1, x2, x3); break;
             default: assert(!"unsupported data type");
